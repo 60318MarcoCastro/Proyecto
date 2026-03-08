@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Menú de Clientes</title>
+
+<style>
+body{
+    font-family: Arial;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+h1{
+    color: #333;
+}
+
+.menu{
+    margin: 20px;
+}
+
+button{
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+table{
+    margin: auto;
+    border-collapse: collapse;
+    width: 70%;
+    background: white;
+}
+
+th, td{
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+th{
+    background-color: #444;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Menú de Clientes</h1>
+
+<div class="menu">
+    <button onclick="generarClientes()">Generar Clientes</button>
+    <button onclick="limpiarTabla()">Limpiar Tabla</button>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Nombre</th>
+<th>Apellido</th>
+<th>Ciudad</th>
+<th>Teléfono</th>
+<th>Email</th>
+</tr>
+</thead>
+
+<tbody id="tablaClientes">
+</tbody>
+</table>
+
+<script>
+
+const nombres = ["Juan","Ana","Carlos","Maria","Luis","Sofia","Pedro","Laura"];
+const apellidos = ["Garcia","Lopez","Martinez","Hernandez","Gonzalez","Perez"];
+const ciudades = ["CDMX","Guadalajara","Monterrey","Puebla","Tijuana","Leon"];
+
+function random(lista){
+    return lista[Math.floor(Math.random() * lista.length)];
+}
+
+function generarTelefono(){
+    return "55" + Math.floor(10000000 + Math.random() * 90000000);
+}
+
+function generarEmail(nombre, apellido){
+    return (nombre + "." + apellido + "@correo.com").toLowerCase();
+}
+
+function generarClientes(){
+
+    const tabla = document.getElementById("tablaClientes");
+    tabla.innerHTML = "";
+
+    for(let i = 1; i <= 5; i++){
+
+        let nombre = random(nombres);
+        let apellido = random(apellidos);
+
+        let fila = `
+        <tr>
+            <td>${i}</td>
+            <td>${nombre}</td>
+            <td>${apellido}</td>
+            <td>${random(ciudades)}</td>
+            <td>${generarTelefono()}</td>
+            <td>${generarEmail(nombre,apellido)}</td>
+        </tr>
+        `;
+
+        tabla.innerHTML += fila;
+    }
+}
+
+function limpiarTabla(){
+    document.getElementById("tablaClientes").innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>

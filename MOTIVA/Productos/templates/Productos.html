@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Menú de Vehículos</title>
+
+<style>
+body{
+    font-family: Arial;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+h1{
+    color: #333;
+}
+
+.menu{
+    margin: 20px;
+}
+
+button{
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+table{
+    margin: auto;
+    border-collapse: collapse;
+    width: 60%;
+    background: white;
+}
+
+th, td{
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+th{
+    background-color: #333;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Menú de Vehículos</h1>
+
+<div class="menu">
+    <button onclick="generarVehiculos()">Generar Vehículos</button>
+    <button onclick="limpiarTabla()">Limpiar Tabla</button>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Marca</th>
+<th>Modelo</th>
+<th>Año</th>
+<th>Color</th>
+</tr>
+</thead>
+
+<tbody id="tablaVehiculos">
+</tbody>
+</table>
+
+<script>
+
+const marcas = ["Toyota", "Nissan", "Ford", "Chevrolet", "Honda", "BMW", "Audi"];
+const modelos = ["Sedan", "SUV", "Pickup", "Hatchback", "Coupe"];
+const colores = ["Rojo", "Azul", "Negro", "Blanco", "Gris", "Verde"];
+
+function random(lista){
+    return lista[Math.floor(Math.random() * lista.length)];
+}
+
+function generarVehiculos(){
+
+    const tabla = document.getElementById("tablaVehiculos");
+    tabla.innerHTML = "";
+
+    for(let i = 1; i <= 5; i++){
+
+        let fila = `
+        <tr>
+            <td>${i}</td>
+            <td>${random(marcas)}</td>
+            <td>${random(modelos)}</td>
+            <td>${Math.floor(Math.random() * (2024 - 2005) + 2005)}</td>
+            <td>${random(colores)}</td>
+        </tr>
+        `;
+
+        tabla.innerHTML += fila;
+    }
+}
+
+function limpiarTabla(){
+    document.getElementById("tablaVehiculos").innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>
